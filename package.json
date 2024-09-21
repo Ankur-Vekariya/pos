@@ -1,7 +1,7 @@
 {
   "name": "pos",
   "version": "0.1.0",
-  "homepage": "/login",
+  "homepage": "https://ankur-vekariya.github.io/pos/",
   "private": true,
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
