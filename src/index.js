@@ -3,12 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Dashboard } from "./Dashboard";
-import { Signup } from "./Signup";
-import { Login } from "./Login";
 import { AuthProvider } from "./contexts/Auth";
-import { PrivateRoute } from "./components/PrivateRoute";
 
 // const router = createBrowserRouter([
 //   {

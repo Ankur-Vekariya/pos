@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useAuth } from "./contexts/Auth";
 import { useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Carousel, Checkbox, Col, Form, Input, Row } from "antd";
 
 export function Login() {
   const emailRef = useRef();
@@ -33,18 +33,16 @@ export function Login() {
   const onFinish = async (values) => {
     console.log("Success:", values);
     // Get email and password input values
-    const email = values.email;
-    const password = values.password;
-
-    // Calls `signIn` function from the context
+    // const email = values.email;
+    // const password = values.password;
+    const email = "test@gmail.com";
+    const password = "test@123";
     const { error } = await signIn({ email, password });
 
     if (error) {
       alert("error signing in");
     } else {
       navigate("/");
-      // Redirect user to Dashboard
-      //    history.push('/')
     }
   };
   const onFinishFailed = (errorInfo) => {
@@ -52,84 +50,202 @@ export function Login() {
   };
 
   return (
-    <>
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
+    <div style={{ height: "100vh" }}>
+      <Row
         style={{
-          maxWidth: 600,
+          height: "100%",
+          // border: "2px solid orange"
         }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
       >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Email!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        {/* <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
+        <Col
+          span={12}
+          style={{
+            // border: "2px solid red",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            alignContent: "center",
           }}
         >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item> */}
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
+          <img src={require("./assets/login.png")} />
+        </Col>
+        <Col
+          span={12}
+          style={{
+            height: "100%",
+            justifyContent: "center",
+            alignContent: "center",
           }}
         >
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-      {/* <form onSubmit={handleSubmit}>
-        <label htmlFor="input-email">Email</label>
-        <input id="input-email" type="email" ref={emailRef} />
+          <div
+            style={{
+              // border: "2px solid green",
+              justifyContent: "center",
+              display: "flex",
+            }}
+          >
+            <h1>SUPOS</h1>
+          </div>
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            style={{
+              maxWidth: 600,
+            }}
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Email!",
+                },
+              ]}
+            >
+              <Input value={"test@gmail.com"} />
+            </Form.Item>
 
-        <label htmlFor="input-password">Password</label>
-        <input id="input-password" type="password" ref={passwordRef} />
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password value={"test@123"} />
+            </Form.Item>
 
-        <br />
+            <Form.Item
+              wrapperCol={{
+                offset: 8,
+                span: 16,
+              }}
+            >
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Col>
+      </Row>
+    </div>
+    // <Row style={{ height: "100vh", borderWidth: "2px", borderColor: "red" }}>
+    //   <Col
+    //     span={12}
+    //     style={{ height: "100vh", borderWidth: "2px", borderColor: "red" }}
+    //   >
+    //     <Carousel
+    //       autoplay
+    //       style={{
+    //         height: "100vh",
+    //         borderWidth: "2px",
+    //         borderColor: "red",
+    //         margin: 0,
+    //         padding: 0,
+    //       }}
+    //     >
+    //       <div>
+    //         <h3
+    //           style={{
+    //             height: "100vh",
+    //             color: "#fff",
+    //             textAlign: "center",
+    //             background: "#364d79",
+    //           }}
+    //         >
+    //           1
+    //         </h3>
+    //       </div>
+    //       <div>
+    //         <h3
+    //           style={{
+    //             height: "100vh",
+    //             color: "#fff",
+    //             textAlign: "center",
+    //             background: "#364d79",
+    //           }}
+    //         >
+    //           2
+    //         </h3>
+    //       </div>
+    //     </Carousel>
+    //   </Col>
+    //   <Col
+    //     span={12}
+    //     style={{ height: "100%", borderWidth: "2px", borderColor: "red" }}
+    //   >
+    //     <Form
+    //       name="basic"
+    //       labelCol={{
+    //         span: 8,
+    //       }}
+    //       wrapperCol={{
+    //         span: 16,
+    //       }}
+    //       style={{
+    //         maxWidth: 600,
+    //       }}
+    //       initialValues={{
+    //         remember: true,
+    //       }}
+    //       onFinish={onFinish}
+    //       onFinishFailed={onFinishFailed}
+    //       autoComplete="off"
+    //     >
+    //       <Form.Item
+    //         label="Email"
+    //         name="email"
+    //         rules={[
+    //           {
+    //             required: true,
+    //             message: "Please input your Email!",
+    //           },
+    //         ]}
+    //       >
+    //         <Input />
+    //       </Form.Item>
 
-        <button type="submit">Login</button>
-      </form> */}
-    </>
+    //       <Form.Item
+    //         label="Password"
+    //         name="password"
+    //         rules={[
+    //           {
+    //             required: true,
+    //             message: "Please input your password!",
+    //           },
+    //         ]}
+    //       >
+    //         <Input.Password />
+    //       </Form.Item>
+
+    //       <Form.Item
+    //         wrapperCol={{
+    //           offset: 8,
+    //           span: 16,
+    //         }}
+    //       >
+    //         <Button type="primary" htmlType="submit">
+    //           Submit
+    //         </Button>
+    //       </Form.Item>
+    //     </Form>
+    //   </Col>
+    // </Row>
   );
 }

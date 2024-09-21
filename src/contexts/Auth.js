@@ -9,21 +9,34 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     // Check active sessions and sets the user
-    const session = supabase.auth?.getSession()
-
-    setUser(session?.user ?? null);
-    setLoading(false);
+    const session = supabase.auth?.getSession();
+    console.log("session----------", session);
+    session
+      .then((data) => {
+        console.log("data----------", data.data.session.user);
+        setUser(data.data.session.user);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setUser(null);
+        setLoading(false);
+      });
 
     // Listen for changes on auth state (logged in, signed out, etc.)
-    const { data } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+    const { data } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "SIGNED_IN") {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      } else if (event === "SIGNED_OUT") {
+        setUser(null);
+        setLoading(false);
+      } else if (event === "TOKEN_REFRESHED") {
         setUser(session?.user ?? null);
         setLoading(false);
       }
-    );
+    });
 
-    console.log("data------",data);
-    
+    // console.log("data------", data);
 
     return () => {
       data.subscription?.unsubscribe();
@@ -45,5 +58,5 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-    return useContext(AuthContext)
-  }
+  return useContext(AuthContext);
+}
