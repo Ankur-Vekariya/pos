@@ -3,8 +3,9 @@ import { Button, Col, Flex, Layout, Menu, Row } from "antd";
 import { theme } from "../constants/theme";
 import { useAuth } from "../contexts/Auth";
 import { useNavigate } from "react-router-dom";
+import TopBar from "./TopBar";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Sider, Content } = Layout;
 
 const siderStyle = {
   textAlign: "center",
@@ -32,6 +33,7 @@ export default function OutLet({ children }) {
         {
           key: "12",
           label: "Add",
+          route: "/edit-products",
         },
         // {
         //   key: "13",
@@ -118,11 +120,6 @@ export default function OutLet({ children }) {
       ],
     },
   ];
-  async function handleSignOut() {
-    // @TODO: add sign out logic
-    await signOut();
-    navigate("/login");
-  }
 
   const getLevelKeys = (items1) => {
     const key = {};
@@ -163,36 +160,7 @@ export default function OutLet({ children }) {
   };
   return (
     <Layout>
-      <Header
-        style={{
-          textAlign: "center",
-          // color: "#fff",
-          backgroundColor: theme.white,
-          height: "50%",
-          padding: 0,
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Row
-          style={{
-            width: "100%",
-            alignItems: "center",
-          }}
-        >
-          <Col span={3}>
-            <h1>SUPOS</h1>
-          </Col>
-          <Col span={18}>
-            <p>Welcome!</p>
-          </Col>
-          <Col span={3}>
-            <Button type="primary" onClick={handleSignOut}>
-              Sign out
-            </Button>
-          </Col>
-        </Row>
-      </Header>
+      <TopBar />
       <Layout>
         <Sider width="15%" style={siderStyle}>
           <Menu
@@ -212,11 +180,13 @@ export default function OutLet({ children }) {
                   .children.filter((value) => data.key === value.key)[0].route
               );
               //   let parent = ;
-            //   console.log("parent==============", parent[0]);
+              //   console.log("parent==============", parent[0]);
             }}
           />
         </Sider>
-        <Content style={{ backgroundColor: theme.lightBackground }}>
+        <Content
+          style={{ backgroundColor: theme.lightBackground, padding: "10px" }}
+        >
           {children}
         </Content>
       </Layout>
